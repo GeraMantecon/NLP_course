@@ -49,7 +49,7 @@ def preprocessDataset(dataset, foreign_characters, url, numbers, lemmatize):
 		processed_set = aux_set
 	if lemmatize:
 		tk = LemmaTokenizer()
-		processed_set = [" ".join(tk(line)) for line in processed_set]
+		processed_set = [" ".join(tk(line.lower())) for line in processed_set]
 	return processed_set
 def filterTokens(tokens, stop_words, punctuation):
 	aux_tokens = tokens
@@ -101,10 +101,18 @@ def tokenizeAndCount(input_file, stop_words, punctuation, numbers, foreign_chara
 		dataset = preprocessDataset(dataset, foreign_characters, url, numbers, lemmatize)
 	#Tokenize using NLTK and extra multi word expresions. If the dataset was lematized
 	# before, tokenizing step was performed at that time. No need to repeat again.
+	tokenized_line = []
 	if not lemmatize:
 		tokens = nltk.TweetTokenizer().tokenize(" ".join(dataset))
+		tokenized_line= [nltk.TweetTokenizer().tokenize(line) for line in dataset]
 	else:
 		tokens = [token for line in dataset for token in line.split(' ')]
+		tokenized_line= [line.split(' ') for line in dataset]
+	if len(tokenized_line) > 0:
+		with open('tokenized_per_line_'+output_file,'w') as f:
+			for element in tokenized_line:
+				f.write(str(filterTokens(element,True,True)))
+				f.write('\n')
 	#Filter tokens to form list of words: 1)Stop words removal. 2)Punctuation removal.
 	words_list = []
 	if stop_words or punctuation:
