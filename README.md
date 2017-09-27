@@ -44,3 +44,10 @@ Options:
   -l                    Lemmatize and tokenize at the same time the corpus. No need to tokenize again.  
   -u                    Preprocessing step: Replace URLs into a word token.  
   -mwe                  Find multiword expressions on dataset.  
+
+The script assignment_1_2.py provides a way to calculate accuracy for the output of our POS tagger of choice (Stanford's POS Tagger) on the provided corpus from twitter.  
+
+Havin the output the POS tagger we run the script as follows:  
+``` shell
+python assignment_1_2.py EXPECTED_TAGS.txt GENERATED_TAGS.txt
+```
