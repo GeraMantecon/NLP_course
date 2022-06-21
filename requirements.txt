@@ -7,7 +7,7 @@ idna==2.6
 Markdown==2.6.9
 n2w==0.1.1
 nltk==3.4.5
-numpy==1.13.1
+numpy==1.22.0
 requests==2.18.4
 scipy==0.19.1
 six==1.11.0
